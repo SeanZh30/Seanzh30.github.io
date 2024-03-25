@@ -6,7 +6,7 @@ layout: homepage
 
 
 ## Short Bio
-👋 Greatings! / 你好! / 안녕하세요! / こんにちは! / Hola! / Ciao! / Привет！
+👋 Greatings / Hola / Ciao / 안녕하세요 / こんにちは / 你好 
 
 📖 I am currently a first-year CS major master’s student at UIUC (2023-Now).
 
@@ -23,7 +23,7 @@ layout: homepage
 - **ML Explainability:**  effectively operationalize regulatory principles
 - **Data Attributation Method:** how to get the influence between sample and generated data
 
-<strong style="color:#e74d3c; font-weight:600"><strong style="color:#e74d3c; font-weight:600">I am currently looking for the PhD opportunity on the 2024-2025, looking for the position in CS, Information Science, Statistics, etc., related to Artificial Intelligence, NLP, and Machine Learning. Please feel free to contact me if you are interested. I am also happy to give talks on my research.</strong></strong>
+<strong style="color:#e74d3c; font-weight:600"><strong style="color:#57068c; font-weight:600">I am currently looking for the PhD opportunity on the 2024-2025, looking for the position in CS, Information Science, Statistics, etc., related to Artificial Intelligence, NLP, and Machine Learning. Please feel free to contact me if you are interested. I am also happy to give talks on my research.</strong></strong>
 
 {% include_relative _includes/news.md %}
 

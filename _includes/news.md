@@ -2,9 +2,9 @@
 
 <h2 style="margin: 60px 0px 10px;">News</h2>
 <ul>
-  <li><strong>[10/2023]</strong> Excited to join the Trustworthy and Regulatable AI Systems lab, working with Professor Jiaqi Ma.</li>
+  <li><strong>[10/2023]</strong> Excited to join the TRAIS lab, working with Professor Jiaqi Ma.</li>
   <li><strong>[05/2023]</strong> Proudly graduated from UIUC with Highest Distinction in Statistics!</li>
-  <li><strong>[04/2023]</strong> Honored to have maintained a place in the Dean's List throughout my tenure at UIUC.</li>
+  <li><strong>[04/2023]</strong> Honored to keep in the Dean's List all semesters at UIUC.</li>
   <li><strong>[02/2023]</strong> Thrilled to have been admitted to the UIUC Master's program in Computer Science!</li>
 </ul>
 <!-- <ul>
