@@ -6,9 +6,15 @@ layout: homepage
 
 
 ## Short Bio
+👋 Greatings! / 你好! / 안녕하세요! / こんにちは! / Hola! / Ciao! / Привет！
+
 📖 I am currently a first-year CS major master’s student at UIUC (2023-Now).
 
-I am a member of the Trustworthy and Regulatable AI Systems lab, working with Prof. Jiaqi Ma. Prior to this, I completed my Bachelor's degree in Statistics also at the UIUC. Additionally, I am a transfer student, having initially studied at XJTLU. If you have any questions about the undergraduate transfer process, I would be happy to share my experience.
+🔬 I am a member of the Trustworthy and Regulatable AI Systems lab, working with Prof. Jiaqi Ma. 
+
+🏫 Prior to this, I completed my Bachelor's degree in Statistics also at the UIUC. 
+
+☕️ Additionally, I am a transfer student, having initially studied at XJTLU, which located in a beautiful city Suzhou. If you have any questions about the undergraduate transfer process, I would be happy to share my experience.
 
 
 ## Research Interests
