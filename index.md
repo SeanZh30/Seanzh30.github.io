@@ -26,12 +26,12 @@ layout: homepage
 
 <strong style="color:#e74d3c; font-weight:600"><strong style="color:#57068c; font-weight:600">I am currently looking for the PhD opportunity on the 2024-2025, looking for the position in CS, Information Science, etc., related to Artificial Intelligence, NLP, and Machine Learning. Please feel free to contact me if you are interested. </strong></strong>
 
-{% include_relative _includes/news.md %}
+{% include_relative _includes/education.md %}
 
 {% include_relative _includes/publications.md %}
 
 {% include_relative _includes/teaching.md %}
 
-{% include_relative _includes/education.md %}
+{% include_relative _includes/news.md %}
 
 {% include_relative _includes/contact.md %}
