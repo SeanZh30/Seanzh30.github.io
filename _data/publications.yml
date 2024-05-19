@@ -1,5 +1,15 @@
 main:
 
+  - title: "Nuanced Multi-class Detection of Machine-Generated Scientific Text"
+    authors: Yubin Ge *, <strong>Shiyuan Zhang *<sup><i class="fa-regular fa-envelope fa-xs"></i></sup></strong>, Xiaofeng Liu
+    conference_short: Preprint
+    conference: Preprint
+    pdf: 
+    code: 
+    bibtex: 
+    image: ./assets/teaser/SciText.jpg
+    notes: 
+
   - title: "Computational Copyright: Towards A Royalty Model for AI Music Generation Platforms"
     authors: Junwei Deng, <strong>Shiyuan Zhang<sup><i class="fa-regular fa-envelope fa-xs"></i></sup></strong>, Jiaqi Ma
     conference_short: Preprint
