@@ -9,25 +9,25 @@ main:
   #   image: 
   #   notes: 
 
-  # - title: "Nuanced Multi-class Detection of Machine-Generated Scientific Text"
-  #   authors: Yubin Ge*, <strong>Shiyuan Zhang*<sup><i class="fa-regular fa-envelope fa-xs"></i></sup></strong>, Xiaofeng Liu
-  #   conference_short: ACL Workshop
-  #   conference: The 4th Workshop on Scholarly Document Processing @ ACL 2024
-  #   pdf: 
-  #   code: 
-  #   bibtex: 
-  #   image: ./assets/teaser/SciText.jpg
-  #   notes: 
+  - title: "Nuanced Multi-class Detection of Machine-Generated Scientific Text"
+    authors: Yubin Ge*, <strong>Shiyuan Zhang*<sup><i class="fa-regular fa-envelope fa-xs"></i></sup></strong>, Xiaofeng Liu
+    conference_short: Under review
+    conference: Under review
+    pdf: 
+    code: 
+    bibtex: 
+    image: ./assets/teaser/SciText.jpg
+    notes: 
 
-  # - title: "Computational Copyright: Towards A Royalty Model for AI Music Generation Platforms"
-  #   authors: Junwei Deng, <strong>Shiyuan Zhang<sup><i class="fa-regular fa-envelope fa-xs"></i></sup></strong>, Jiaqi Ma
-  #   conference_short: Under review
-  #   conference: Under review
-  #   pdf: # https://arxiv.org/pdf/2312.06646.pdf
-  #   code: 
-  #   bibtex: 
-  #   image: ./assets/teaser/music.jpg
-  #   notes: 
+  - title: "Computational Copyright: Towards A Royalty Model for AI Music Generation Platforms"
+    authors: Junwei Deng, <strong>Shiyuan Zhang<sup><i class="fa-regular fa-envelope fa-xs"></i></sup></strong>, Jiaqi Ma
+    conference_short: Under review
+    conference: Under review
+    pdf: 
+    code: 
+    bibtex: 
+    image: ./assets/teaser/music.jpg
+    notes: 
 
   # - title: Generating Images with 3D Annotations Using Diffusion Models
   #   authors: Wufei Ma*, Qihao Liu*, Jiahao Wang*, Angtian Wang, Xiaoding Yuan, Yi Zhang, Zihao Xiao, Guofeng Zhang, Beijia Lu, Ruxiao Duan, Yongrui Qi, Adam Kortylewski, <strong>Yaoyao Liu<sup><i class="fa-regular fa-envelope fa-xs"></i></sup></strong>, Alan Yuille <br>( <sup><i class="fa-regular fa-envelope fa-xs"></i></sup> Corresponding author)
