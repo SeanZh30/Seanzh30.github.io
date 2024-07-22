@@ -23,8 +23,9 @@ main:
     authors: Junwei Deng, <strong>Shiyuan Zhang<sup><i class="fa-regular fa-envelope fa-xs"></i></sup></strong>, Jiaqi Ma
     conference_short: Under review
     conference: Under review
-    pdf: 
+    pdf: https://arxiv.org/pdf/2312.06646
     code: 
+    page: https://arxiv.org/abs/2312.06646
     bibtex: 
     image: ./assets/teaser/music.jpg
     notes: 
