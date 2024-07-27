@@ -37,4 +37,4 @@ layout: homepage
 
 {% include_relative _includes/contact.md %}
 
-<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=9a48db&w=500&t=n&d=VCWWBgKqEMgmcCbiQIfHQEbjof7zEBNTXPZDf91Iags&co=ffffff&cmo=877575&cmn=b4ceff&ct=000000'></script>
+<script type='text/javascript' id='clustrmaps' src='//cdn.clustrmaps.com/map_v2.js?cl=9a48db&w=300&t=n&d=VCWWBgKqEMgmcCbiQIfHQEbjof7zEBNTXPZDf91Iags&co=ffffff&cmo=877575&cmn=b4ceff&ct=000000'></script>
