@@ -5,25 +5,17 @@ layout: homepage
 <h1 id="about-me"></h1>
 
 
-## Short Bio
+## About me
 👋 Greatings / 你好 !
 
-📖 I am currently a first-year CS major master’s student at UIUC (2023-Now).
-
-🔬 I am a member of the Trustworthy and Regulatable AI Systems lab, working with Prof. Jiaqi Ma. 
-
-🏫 Prior to this, I completed my Bachelor's degree in Statistics also at the UIUC. 
-
-☕️ Additionally, I am a transfer student, having initially studied at XJTLU, which located in a beautiful city Suzhou. If you have any questions about the undergraduate transfer process, I would be happy to share my experience.
-
+I'm Shiyuan(Sean) Zhang, currently a first-year CS major master’s student at <a href="https://cs.illinois.edu/">University of Illinois Urbana-Champaign</a> (2023-Now). My research interest lies in <strong>trustworthy machine learning</strong>, <strong>data centric AI</strong>, and <strong>machine unlearning</strong>. Currently I am fortunate to work with Professor <a href="https://jiaqima.github.io/">Jiaqi Ma</a>. Prior to this, I completed my Bachelor's degree in Statistics also at the UIUC (2019-2023). In life, I have the perfect companionship of this white rag called <a href="_site/assets/img/lulu.jpg">Lulu</a>.
 
 ## Research Interests
 
-- **Trustworthy ML:** fairness, robustness and how to make model safity
-- **ML Explainability:**  data attribution method
-- **NLP:** how to using Language Models generate safity response
+- **Trustworthy ML:** fairness, robustness, and how to make model safety
+- **Data-Centric AI:**  data attribution method
 
-<strong style="color:#e74d3c; font-weight:600"><strong style="color:#57068c; font-weight:600">I am currently looking for the PhD opportunity on the 2025-2026, looking for the position in CS, Information Science, etc., related to Artificial Intelligence, NLP, and Machine Learning. Please feel free to contact me if you are interested. </strong></strong>
+<strong style="color:#e74d3c; font-weight:600"><strong style="color:#57068c; font-weight:600">I am currently looking for the PhD opportunity on the 2025 or 2026, looking for the position in CS, Information Science, etc., related to Artificial Intelligence, NLP, and Machine Learning. Please feel free to contact me if you are interested. </strong></strong>
 
 {% include_relative _includes/publications.md %}
 
