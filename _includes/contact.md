@@ -6,4 +6,4 @@
 <br />
 <strong>Email:</strong> <email>sz54 (at) illinois.edu</email>
 <br />
-<strong>Phone:</strong> (217) 377-5722</p>
+<!-- <strong>Phone:</strong> (217) 377-5722</p> -->
