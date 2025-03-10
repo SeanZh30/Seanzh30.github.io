@@ -43,16 +43,6 @@ redirect_from:
 </section>
 
 
-
-
-# 🔥 News
-
-- *2024.09*: &nbsp;🎉🎉 One paper accepted by **NeurIPS 2024 D&B Track (Spotlight)**!
-- *2024.07*: &nbsp;🎉🎉 One paper presented at **ICML 2024 GenLaw Workshop**!
-- *2023.09*: &nbsp;🏫🏫 Start my master program at UIUC!
-- *2023.05*: &nbsp;📖📖 Proudly graduate from UIUC with Highest Distinction!
-
-
 # 📝 Publications 
 
 (\*: equal contribution)
