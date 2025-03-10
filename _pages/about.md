@@ -17,7 +17,44 @@ redirect_from:
 
 <span class='anchor' id='about-me'></span>
 
-Greatings! I'm Shiyuan(Sean) Zhang, currently a CS major master's student at University of Illinois Urbana-Champaign (UIUC). My research interest lies in data-centric machine learning, trustworthy NLP, and vision langauge models. I am now fortunate to working closely with Prof. <a href="https://jiaqima.github.io/">Jiaqi Ma</a>. Prior to this, I completed my Bachelor's degree also at the UIUC. In life, I have the perfect companionship of this white rag called <a href="../images/lulu.jpg">Lulu</a>.
+# About myself
+
+<section id="student">
+        <h2>Me as a Student</h2>
+        <p>Greetings! I'm <strong>Shiyuan (Sean) Zhang</strong>, currently a CS master’s student at the 
+            <a href="https://illinois.edu/">University of Illinois Urbana-Champaign (UIUC)</a>. 
+            My research interests lie in <strong>data-centric machine learning, trustworthy NLP, and vision-language models</strong>.
+            I am fortunate to be working closely with <a href="https://jiaqima.github.io/">Prof. Jiaqi Ma</a>. 
+            Prior to this, I completed my <strong>Bachelor’s degree</strong> also at UIUC.
+        </p>
+        <p>Beyond academia, I have the perfect companionship of a white rag named 
+            <a href="../images/lulu.jpg">Lulu</a>—a quiet witness to my many late-night coding sessions and research explorations.</p>
+    </section>
+
+    <section id="ta">
+        <h2>Me as a Teaching Assistant</h2>
+        <p>Throughout my graduate studies, I have worked as a <strong>Teaching Assistant (TA) for two years</strong>, 
+            an experience that has profoundly shaped my perspective on education. My role extended beyond grading assignments—
+            it was about <strong>course design, material preparation, and developing programming assessments on PrairieLearn</strong> to enhance student learning.</p>
+        <p>Designing course content taught me how to <strong>break down complex topics</strong> into intuitive explanations, 
+            while writing auto-graded coding problems strengthened my ability to structure learning experiences systematically. 
+            I found immense fulfillment in guiding students through challenging concepts and witnessing their growth over time. 
+            Teaching, in many ways, has been as much a learning experience for me as it was for my students.</p>
+    </section>
+
+    <section id="curiosity">
+        <h2>Me as a Curiosity-Driven Explorer</h2>
+        <p>Trial and experience have been the defining themes of my life. I grew up in a small city in <strong>central China</strong>, 
+            where access to resources was limited but curiosity was boundless. From a young age, I found joy in 
+            <strong>experimenting, failing, and trying again</strong>—a mindset that has carried me through my academic and professional journey.</p>
+        <p>Now, as I stand at the crossroads of research and career exploration, I am eager to <strong>broaden my horizons</strong>. 
+            While my current research focuses on <strong>data-centric AI</strong>, I am also intrigued by 
+            <strong>AI for Science, LLMs</strong>, and the broader implications of machine learning in real-world applications. 
+            Beyond academia, I am keen to explore <strong>trading</strong>, a field that demands sharp analytical skills and decision-making under uncertainty.</p>
+        <p>But my curiosity doesn’t stop at research and finance—I also dream of <strong>becoming a photographer, a game reviewer, 
+            or something entirely unexpected</strong>. The idea of capturing fleeting moments through a lens or critically analyzing game mechanics excites me. 
+            At the end of the day, I see life as an open-world game—one where exploration, discovery, and reinvention are the ultimate goals.</p>
+    </section>
 
 # 🔥 News
 
