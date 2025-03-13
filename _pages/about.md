@@ -66,7 +66,7 @@ Junwei Deng\*, Ting Wei Li\*, <span >Shiyuan Zhang</span>, Shixuan Liu, Yijun Pa
 - [Nuanced Multi-class Detection of Machine-Generated Scientific Text]()\
 <span >Shiyuan Zhang</span>, Yubin Ge, Xiaofeng Liu\
 <span style="color:#8E44AD">**PACLIC**</span> 38th Pacific Asia Conference on Language, Information and Computation\
-[[Code]](https://github.com/SeanZh30/ScientificText_Detection)
+[[Code]](https://github.com/SeanZh30/ScientificText_Detection)[[Paper]](https://drive.google.com/file/d/17hQlHdfiuHTQinEp8JQsmqF0Pfy-7d4i/view?usp=sharing)
 <br>
 <br>
 
