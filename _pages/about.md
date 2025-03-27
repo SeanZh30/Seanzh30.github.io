@@ -20,25 +20,10 @@ redirect_from:
 # About myself
 
 <section id="student">
-    <h2>Me as a Student</h2>
     <p>Hi! I'm Shiyuan (Sean) Zhang, a CS master’s student at 
         <a href="https://illinois.edu/">UIUC</a>, researching data-centric ML, trustworthy NLP, 
         and vision-language models. I'm fortunate to work with <a href="https://jiaqima.github.io/">Prof. Jiaqi Ma</a>.
-        Before this, I earned my Bachelor’s degree also at UIUC.</p>
-</section>
-
-<section id="ta">
-    <h2>Me as a Teaching Assistant</h2>
-    Over past two years as a TA, I’ve gone beyond grading to 
-        course design, material prep, and PrairieLearn programming. Teaching has refined my 
-        ability to simplify complex topics and create structured learning experiences. Guiding students through challenges has been incredibly fulfilling, making teaching as much a learning 
-        journey for me as it is for them.
-</section>
-
-<section id="curiosity">
-    <h2>Me as a Curiosity-Driven Explorer</h2>
-    Beyond my current research interests, I’m eager to explore different areas like trading, where strategy meets uncertainty. I also dream of becoming a photographer, game reviewer, or something 
-        unexpected. Life, to me, is an open-world game—one of endless exploration. I have the perfect companionship of a white rag named 
+        Before this, I earned my Bachelor’s degree also at UIUC.</p> I have the perfect companionship of a white rag named 
             <a href="../images/lulu.jpg">Lulu</a>—a quiet witness to my many late-night coding sessions and research explorations.
 </section>
 
@@ -76,8 +61,15 @@ Junwei Deng\*, Ting Wei Li\*, <span >Shiyuan Zhang</span>, Shixuan Liu, Yijun Pa
 
 
 # 🧑‍🏫 Teaching & Service
+
+Teaching
+
 - *2024.12 - 2025.05*, Teaching Assistant for SIIP Program, UIUC.
 - *2024.09 - 2024.12*, Teaching Assistant for CEE 202, UIUC.
 - *2023.12 - 2024.09*, Teaching Assistant for SIIP Program, UIUC.
 - *2022.05 - 2022.09*, Course Assistant for CS 411, UIUC.
+
+Service
+
+- Reviewer for ACL2024, 2025; ICML 2025
 
