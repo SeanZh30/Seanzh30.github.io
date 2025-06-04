@@ -18,4 +18,6 @@ Hi! I am Shiyuan (Sean) Zhang, a Visiting Research Assistant at the [University 
 
 Outside of academics, I enjoy exploring trading, where I find the unpredictability of the markets both humbling and exhilarating. I also share my quiet late nights with [Lulu](/assets/img/lulu.jpg), a white rag who has been a silent witness to many of my coding sessions and research explorations.
 
+<script type="text/javascript" id="clustrmaps" src="//clustrmaps.com/map_v2.js?d=VCWWBgKqEMgmcCbiQIfHQEbjof7zEBNTXPZDf91Iags&cl=ffffff&w=a"></script>
+
 
