@@ -8,3 +8,11 @@ inline: true
 
 
 
+---
+layout: post
+date: 2025-05-01 12:00:00-0400
+inline: true
+---
+
+🆕 Released a new preprint: *TimeCausality: Evaluating the Causal Ability in Time Dimension for Vision Language Models*.  
+Co-first authored with Zeqing Wang. [Coming soon to arXiv.]
