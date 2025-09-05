@@ -6,19 +6,23 @@
       year: 2023 - 2025
       description:
         - "GPA: 4.0/4.0"
-        - "Research focus: data-centric machine learning, training data attribution, and trustworthy NLP."
+        - "Research focus: data-centric machine learning (training data attribution), and trustworthy NLP."
     - title: B.S. in Statistics, Minor in Computer Science
       institution: University of Illinois Urbana-Champaign (UIUC), USA
       year: 2019 - 2023
       description:
-        - "GPA: 3.97/4.0"
+        - "GPA: 3.96/4.0"
 
 - title: Experience
   type: time_table
   contents:
+    - title: AI Engineer
+        institution: Armada.AI
+        year: 2025 Aug - 2025 Now
+        description:
     - title: Visiting Research Assistant
       institution: University of Southern California (USC)
-      year: 2025 - now
+      year: 2025 May - 2025 Aug
       description:
 
 - title: Teaching Experience
