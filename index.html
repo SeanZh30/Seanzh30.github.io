@@ -9,7 +9,18 @@
   <link rel="icon" type="image/png" href="images/seal_icon.png">
 </head>
 
-<body>
+<body class="colorful">
+
+  <!-- Theme Toggle Button -->
+  <div style="position:fixed;top:16px;right:16px;z-index:999;">
+    <button id="theme-toggle" onclick="toggleTheme()" title="Toggle color theme"
+      style="background:rgba(255,255,255,0.7);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+      border:1px solid rgba(200,210,230,0.4);border-radius:20px;padding:6px 14px;cursor:pointer;
+      font-family:'Lato',sans-serif;font-size:13px;color:#4a5568;transition:all 0.3s ease;box-shadow:0 2px 8px rgba(0,0,0,0.08);">
+      🎨 Color Off
+    </button>
+  </div>
+
   <!-- Header -->
   <table style="width:100%;max-width:900px;margin:auto;border-spacing:0;">
     <tr>
@@ -243,3 +254,28 @@
         src="https://clustrmaps.com/map_v2.js?d=VCWWBgKqEMgmcCbiQIfHQEbjof7zEBNTXPZDf91Iags&cl=ffffff&w=a">
 </script>
 </div>
+
+<script>
+function toggleTheme() {
+  var body = document.body;
+  var btn = document.getElementById('theme-toggle');
+  body.classList.toggle('colorful');
+  if (body.classList.contains('colorful')) {
+    btn.textContent = '🎨 Color Off';
+    localStorage.setItem('colorful', 'true');
+  } else {
+    btn.textContent = '🎨 Color On';
+    localStorage.setItem('colorful', 'false');
+  }
+}
+// Restore preference
+(function() {
+  var pref = localStorage.getItem('colorful');
+  var body = document.body;
+  var btn = document.getElementById('theme-toggle');
+  if (pref === 'false') {
+    body.classList.remove('colorful');
+    btn.textContent = '🎨 Color On';
+  }
+})();
+</script>

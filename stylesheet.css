@@ -129,3 +129,48 @@ name {
 span.highlight {
   background-color: #ffffd0;
 }
+
+/* ===== Colorful gradient theme ===== */
+body {
+  transition: background 0.5s ease;
+}
+
+body.colorful {
+  background: linear-gradient(135deg, #bae6fd 0%, #bbf7d0 35%, #e9d5ff 65%, #fed7aa 100%);
+  background-attachment: fixed;
+}
+
+body.colorful table {
+  background: transparent;
+}
+
+body.colorful heading {
+  color: #2d3748;
+}
+
+body.colorful name {
+  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+body.colorful a {
+  color: #6d28d9;
+}
+
+body.colorful a:focus,
+body.colorful a:hover {
+  color: #ec4899;
+}
+
+/* Toggle button hover */
+#theme-toggle:hover {
+  box-shadow: 0 4px 15px rgba(0,0,0,0.12);
+  transform: translateY(-1px);
+}
+
+body.colorful #theme-toggle {
+  background: rgba(255,255,255,0.8);
+  border-color: rgba(167,139,250,0.4);
+}
