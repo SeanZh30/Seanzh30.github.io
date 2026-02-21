@@ -18,8 +18,10 @@
   contents:
     - title: AI Engineer
       institution: Armada.AI
-      year: 2025 Aug - 2025 Now
+      year: 2025 Aug - 2026 Aug
       description:
+        - Deployed a fine-tuned LLM that translates raw data into structured, LLM-friendly representations, producing actionable natural-language insights and enhancing operational efficiency by 4%.
+        - Developed an end-to-end industrial intelligence platform for rare earth mining flotation processes, incorporating a suite of ML models (XGBoost-based multi-objective optimization, LSTM sequence modeling) to enable predictive process control and automated decision support; delivered +3% recovery rate improvement with grade quality control at 63.5%+.
     - title: Visiting Research Assistant
       institution: University of Southern California (USC)
       year: 2025 May - 2025 Aug
