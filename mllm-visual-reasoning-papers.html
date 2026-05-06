@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MLLM 主动视觉推理论文集</title>
+  <style>
+    :root {
+      --bg: #f6f8fa;
+      --card-bg: #ffffff;
+      --sidebar-bg: #1e293b;
+      --sidebar-text: #e2e8f0;
+      --sidebar-active: #3b82f6;
+      --accent: #3b82f6;
+      --accent2: #8b5cf6;
+      --accent3: #10b981;
+      --border: #e2e8f0;
+      --text: #1e293b;
+      --text-muted: #64748b;
+      --tag-bg: #eff6ff;
+      --tag-text: #1d4ed8;
+      --header-height: 60px;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      min-height: 100vh;
+    }
+
+    /* ─── Header ─── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: #1e293b;
+      color: #fff;
+      height: var(--header-height);
+      display: flex;
+      align-items: center;
+      padding: 0 24px;
+      gap: 12px;
+      box-shadow: 0 2px 8px rgba(0,0,0,.2);
+    }
+    header h1 { font-size: 1.1rem; font-weight: 700; letter-spacing: .02em; }
+    header .badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: .72rem;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    header .search-wrap {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    #searchInput {
+      border: none;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: .85rem;
+      width: 220px;
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      outline: none;
+      transition: background .2s;
+    }
+    #searchInput::placeholder { color: rgba(255,255,255,.5); }
+    #searchInput:focus { background: rgba(255,255,255,.22); }
+
+    /* ─── Layout ─── */
+    .layout {
+      display: flex;
+      flex: 1;
+    }
+
+    /* ─── Sidebar ─── */
+    aside {
+      width: 220px;
+      min-width: 220px;
+      background: var(--sidebar-bg);
+      color: var(--sidebar-text);
+      padding: 20px 0 40px;
+      position: sticky;
+      top: var(--header-height);
+      height: calc(100vh - var(--header-height));
+      overflow-y: auto;
+    }
+    aside h2 {
+      font-size: .7rem;
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      color: #94a3b8;
+      padding: 0 18px 8px;
+    }
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 18px;
+      cursor: pointer;
+      font-size: .83rem;
+      border-left: 3px solid transparent;
+      transition: all .15s;
+      color: var(--sidebar-text);
+      text-decoration: none;
+    }
+    .nav-item:hover { background: rgba(255,255,255,.06); color: #fff; }
+    .nav-item.active {
+      border-left-color: var(--accent);
+      background: rgba(59,130,246,.15);
+      color: #fff;
+      font-weight: 600;
+    }
+    .nav-count {
+      margin-left: auto;
+      font-size: .7rem;
+      background: rgba(255,255,255,.12);
+      padding: 1px 6px;
+      border-radius: 8px;
+    }
+    .nav-divider { height: 1px; background: rgba(255,255,255,.08); margin: 8px 18px; }
+
+    /* ─── Main content ─── */
+    main {
+      flex: 1;
+      padding: 28px 32px;
+      max-width: 1100px;
+    }
+
+    .section-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--border);
+    }
+    .section-title .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      background: var(--accent);
+      flex-shrink: 0;
+    }
+
+    /* ─── Paper card ─── */
+    .paper-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 20px 22px;
+      margin-bottom: 16px;
+      transition: box-shadow .2s, border-color .2s;
+    }
+    .paper-card:hover {
+      box-shadow: 0 4px 16px rgba(0,0,0,.08);
+      border-color: #cbd5e1;
+    }
+
+    .paper-top {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      margin-bottom: 10px;
+    }
+    .paper-number {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      background: var(--accent);
+      color: #fff;
+      font-size: .75rem;
+      font-weight: 700;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 2px;
+    }
+    .paper-title {
+      font-size: .97rem;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.4;
+    }
+    .paper-title a {
+      color: inherit;
+      text-decoration: none;
+    }
+    .paper-title a:hover { color: var(--accent); text-decoration: underline; }
+
+    .paper-meta {
+      font-size: .78rem;
+      color: var(--text-muted);
+      margin: 4px 0 10px 42px;
+    }
+
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0 0 12px 42px; }
+    .tag {
+      font-size: .7rem;
+      font-weight: 600;
+      padding: 2px 9px;
+      border-radius: 20px;
+      background: var(--tag-bg);
+      color: var(--tag-text);
+    }
+    .tag.rl    { background: #fef3c7; color: #92400e; }
+    .tag.tool  { background: #d1fae5; color: #065f46; }
+    .tag.align { background: #ede9fe; color: #5b21b6; }
+    .tag.zoom  { background: #fce7f3; color: #9d174d; }
+    .tag.found { background: #fee2e2; color: #991b1b; }
+    .tag.new   { background: #e0f2fe; color: #075985; }
+
+    .tldr {
+      margin: 0 0 12px 42px;
+      font-size: .85rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .tldr strong { color: var(--text); }
+
+    .dims {
+      margin: 0 0 0 42px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .dim {
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 10px 12px;
+      font-size: .8rem;
+      line-height: 1.5;
+    }
+    .dim-label {
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 3px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+    }
+    .dim-body { color: var(--text-muted); }
+
+    .toggle-btn {
+      margin: 12px 0 0 42px;
+      background: none;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 4px 12px;
+      font-size: .78rem;
+      color: var(--text-muted);
+      cursor: pointer;
+      transition: all .15s;
+    }
+    .toggle-btn:hover { border-color: var(--accent); color: var(--accent); }
+
+    .abstract-full {
+      margin: 10px 0 0 42px;
+      font-size: .82rem;
+      color: var(--text-muted);
+      line-height: 1.65;
+      background: var(--bg);
+      border-radius: 8px;
+      padding: 12px;
+      display: none;
+    }
+    .abstract-full.open { display: block; }
+
+    /* ─── Empty state ─── */
+    .empty { text-align: center; color: var(--text-muted); padding: 60px 0; font-size: .95rem; }
+
+    /* ─── Responsive ─── */
+    @media (max-width: 768px) {
+      aside { display: none; }
+      main { padding: 16px; }
+      .dims { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ───── Header ───── -->
+<header>
+  <h1>MLLM 主动视觉推理论文集</h1>
+  <span class="badge">14 篇</span>
+  <div class="search-wrap">
+    <input id="searchInput" type="text" placeholder="搜索标题、关键词…" oninput="filterPapers()" />
+  </div>
+</header>
+
+<div class="layout">
+
+<!-- ───── Sidebar ───── -->
+<aside>
+  <h2>研究方向</h2>
+  <a class="nav-item active" href="#" onclick="filterCategory('all',this)">
+    📚 全部论文 <span class="nav-count">14</span>
+  </a>
+  <div class="nav-divider"></div>
+  <a class="nav-item" href="#" onclick="filterCategory('active-perception',this)">
+    🔍 主动视觉感知与工具 <span class="nav-count">6</span>
+  </a>
+  <a class="nav-item" href="#" onclick="filterCategory('perception-alignment',this)">
+    🎯 感知-推理对齐 <span class="nav-count">5</span>
+  </a>
+  <a class="nav-item" href="#" onclick="filterCategory('fine-grained',this)">
+    🔬 细粒度视觉理解 <span class="nav-count">1</span>
+  </a>
+  <a class="nav-item" href="#" onclick="filterCategory('rl-foundation',this)">
+    ⚙️ RL 训练基础方法 <span class="nav-count">2</span>
+  </a>
+  <div class="nav-divider"></div>
+  <h2 style="margin-top:12px">筛选标签</h2>
+  <a class="nav-item" href="#" onclick="filterTag('RL',this)">🤖 强化学习 (RL)</a>
+  <a class="nav-item" href="#" onclick="filterTag('Tool Use',this)">🛠 工具调用</a>
+  <a class="nav-item" href="#" onclick="filterTag('Visual Alignment',this)">👁 视觉对齐</a>
+  <a class="nav-item" href="#" onclick="filterTag('Zoom',this)">🔎 图像缩放</a>
+</aside>
+
+<!-- ───── Main ───── -->
+<main id="paperList">
+
+  <!-- ══════════════════════════════════════════
+       SECTION 1: 主动视觉感知与工具调用
+  ══════════════════════════════════════════ -->
+  <div class="section-title" id="active-perception">
+    <span class="dot" style="background:#3b82f6"></span>
+    主动视觉感知与工具调用
+  </div>
+
+  <!-- Paper 1: V-Reflection -->
+  <div class="paper-card" data-category="active-perception perception-alignment" data-tags="RL Visual Alignment">
+    <div class="paper-top">
+      <div class="paper-number">1</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2604.03307" target="_blank">
+          V-Reflection: Transforming MLLMs from Passive Observers to Active Interrogators
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Xintong Zhang et al. · arXiv:2604.03307 · April 2026 · IDEA Research</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag align">Visual Alignment</span>
+      <span class="tag new">2026</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>提出 "think-then-look" 视觉反思机制，让 MLLM 在推理过程中将隐状态作为动态探针，主动询问视觉特征空间，从根本上改变模型作为静态旁观者的被动推理模式。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">MLLMs 将视觉输入视为静态前言，推理局限于语言域，无法在推理过程中回溯视觉细节，导致细粒度任务产生幻觉。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">Dynamic Autoregressive Compression (DAC) 模块将隐状态映射为动态探针，蒸馏 BCM 教师的空间定位能力，推理时完全在隐空间自回归解码。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">在 6 个感知密集型基准上取得显著提升，大幅缩小细粒度感知差距，推理效率无损。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">首次将视觉反思内化为端到端自回归流程；无需外部 API，DAC 在推理阶段保持透明。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">Multimodal Large Language Models (MLLMs) have achieved remarkable success, yet they remain prone to perception-related hallucinations in fine-grained tasks. This vulnerability arises from a fundamental limitation: their reasoning is largely restricted to the language domain, treating visual input as a static, reasoning-agnostic preamble rather than a dynamic participant. To overcome this, V-Reflection proposes a "think-then-look" visual reflection mechanism. During reasoning, latent states function as dynamic probes that actively interrogate the visual feature space, grounding each reasoning step. A Dynamic Autoregressive Compression (DAC) module maps the model's hidden states into dynamic probes that interrogate the global visual feature map. By distilling the spatial expertise of the BCM teacher into the DAC student, V-Reflection internalizes the ability to localize task-critical evidence.</div>
+  </div>
+
+  <!-- Paper 2: DeepEyes -->
+  <div class="paper-card" data-category="active-perception" data-tags="RL Visual Alignment">
+    <div class="paper-top">
+      <div class="paper-number">2</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2505.14362" target="_blank">
+          DeepEyes: Incentivizing "Thinking with Images" via Reinforcement Learning
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Ziwei Zheng, Michael Yang, Jack Hong et al. · arXiv:2505.14362 · May 2025 · Xiaohongshu Inc. & XJTU</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag align">Visual Alignment</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>无需冷启动 SFT，端到端 RL 训练使模型自发涌现"以图思考"能力，利用模型自身 grounding 能力作为内在函数，实现主动感知驱动的视觉推理。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">VLMs 擅长多模态理解，但难以将视觉信息深度融入以文本为主的推理流程，缺乏视觉-推理紧密耦合。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">定制化数据选择与奖励策略，不依赖外部专用模型或 API，以模型自身 grounding 能力为内在函数，端到端 RL 训练。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">在通用感知、推理基准及 grounding、幻觉、数学推理任务上均显著提升。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">首个无需预收集推理数据即可端到端训练"以图思考"能力的 RL 框架。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">Large Vision-Language Models excel at multimodal understanding but struggle to deeply integrate visual information into their predominantly text-based reasoning processes. DeepEyes introduces a model that learns to "think with images", trained end-to-end with reinforcement learning without requiring pre-collected reasoning data for cold-start supervised fine-tuning (SFT). This ability emerges natively, leveraging the model's own grounding capability as an intrinsic function rather than relying on external specialized models or APIs. DeepEyes enables active perception, where the model learns to strategically ground its reasoning in visual information, guided by a tailored data selection and reward strategy.</div>
+  </div>
+
+  <!-- Paper 3: Pixel Reasoner -->
+  <div class="paper-card" data-category="active-perception" data-tags="RL Zoom Tool Use">
+    <div class="paper-top">
+      <div class="paper-number">3</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2505.15966" target="_blank">
+          Pixel Reasoner: Incentivizing Pixel-Space Reasoning with Curiosity-Driven Reinforcement Learning
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Haozhe Wang, Alex Su, Weiming Ren, Fangzhen Lin, Wenhu Chen · arXiv:2505.15966 · May 2025</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag zoom">Zoom</span>
+      <span class="tag tool">Tool Use</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>将推理过程扩展到像素空间，VLM 可执行 zoom-in、select-frame 等视觉操作；好奇心驱动的 RL 奖励在像素推理与文本推理之间取得平衡，7B 模型在 V* bench 上达到 84%。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">链式思维推理局限于文本空间，限制了视觉密集型任务的推理保真度。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">引入像素空间推理操作（zoom-in、select-frame），配合好奇心驱动 RL 奖励，平衡视觉与文本推理探索。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">7B 模型：V* bench 84%、TallyQA-Complex 74%、InfographicsVQA 84%，均为开源 SOTA。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">首次将像素级视觉操作纳入 VLM 推理链；好奇心奖励机制有效防止推理塌陷。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">While chain-of-thought reasoning has significantly improved the performance of Large Language Models (LLMs) across various domains, this reasoning process has been confined exclusively to textual space, limiting its effectiveness in visually intensive tasks. Pixel Reasoner introduces the concept of reasoning in the pixel-space, where Vision-Language Models (VLMs) are equipped with a suite of visual reasoning operations, such as zoom-in and select-frame, enabling VLMs to directly inspect, interrogate, and infer from visual evidence. A reinforcement learning (RL) phase leverages a curiosity-driven reward scheme to balance exploration between pixel-space reasoning and textual reasoning.</div>
+  </div>
+
+  <!-- Paper 4: Chain-of-Focus -->
+  <div class="paper-card" data-category="active-perception" data-tags="RL Zoom Tool Use">
+    <div class="paper-top">
+      <div class="paper-number">4</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2505.15436" target="_blank">
+          Chain-of-Focus: Adaptive Visual Search and Zooming for Multimodal Reasoning via RL
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Xintong Zhang et al. · arXiv:2505.15436 · May 2025</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag zoom">Zoom</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>SFT + RL 两阶段训练让 VLM 自适应聚焦并缩放关键图像区域，在 V* 基准 4K 超高分辨率场景下超越现有 VLM 5%，大幅提升部署效率。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">现有 VLM 在超高分辨率图像推理中依赖固定分辨率，无法自适应聚焦关键区域，导致效率与精度双重损失。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">Chain-of-Focus (CoF)：SFT 初始化 + RL 微调（Qwen2.5-VL），以准确率和格式奖励驱动自适应视觉搜索策略。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">V* 基准 8 种分辨率（224-4K）上超越对比模型 5%。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">自适应分辨率聚焦策略；无需人工先验的 RL 策略优化。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">The Chain-of-Focus (CoF) method allows VLMs to perform adaptive focusing and zooming in on key image regions based on obtained visual cues and the given questions, achieving efficient multimodal reasoning. The proposed CoF method adopts a two-stage training strategy using supervised fine-tuning (SFT) and reinforcement learning (RL) to enable adaptive visual search and reasoning. In the RL stage, the outcome accuracies and formats are leveraged as rewards to update the Qwen2.5-VL model, enabling further refining the search and reasoning strategy without human priors. On the V* benchmark, the model outperforms existing VLMs by 5% across 8 image resolutions ranging from 224 to 4K.</div>
+  </div>
+
+  <!-- Paper 5: OpenThinkIMG -->
+  <div class="paper-card" data-category="active-perception" data-tags="RL Tool Use">
+    <div class="paper-top">
+      <div class="paper-number">5</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2505.08617" target="_blank">
+          OpenThinkIMG: Learning to Think with Images via Visual Tool Reinforcement Learning
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Zhaochen Su et al. · arXiv:2505.08617 · May 2025</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag tool">Tool Use</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>首个开源端到端工具增强 LVLM 框架，提出 V-ToolRL 使模型学习自适应调用外部视觉工具（检测、分割、OCR 等），2B 模型超越 GPT-4.1 8.68 分。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">人类可灵活调用交互式视觉认知能力，但现有 LVLM 学习此类自适应行为仍极具挑战性。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">标准化视觉工具接口 + 可扩展轨迹生成 + V-ToolRL 强化学习框架，训练自适应工具调用策略。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">Qwen2-VL-2B 超越 SFT 基线 +28.83 分，超越 GPT-4.1 +8.68 分，超越 Taco/CogCom 平均 +12.7 分。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">首个开源全流程工具增强 LVLM 框架；V-ToolRL 泛化能力强，工具集可扩展。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">OpenThinkIMG is the first open-source, comprehensive end-to-end framework for tool-augmented Large Vision-Language Models (LVLMs). While humans can flexibly leverage interactive visual cognition for complex problem-solving, enabling LVLMs to learn similarly adaptive behaviors with visual tools remains challenging. The framework features standardized vision tool interfaces, scalable trajectory generation for policy initialization, and a flexible training environment. Beyond supervised fine-tuning (SFT), the framework proposes V-ToolRL to train LVLMs to learn adaptive policies for invoking external vision tools (detection, segmentation, OCR, annotation, region manipulation). An RL-trained agent on Qwen2-VL-2B significantly outperformed SFT (+28.83 points) and surpassed GPT-4.1 by +8.68 accuracy points.</div>
+  </div>
+
+  <!-- Paper 6: VTool-R1 -->
+  <div class="paper-card" data-category="active-perception" data-tags="RL Tool Use">
+    <div class="paper-top">
+      <div class="paper-number">6</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2505.19255" target="_blank">
+          VTool-R1: VLMs Learn to Think with Images via Reinforcement Learning on Multimodal Tool Use
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Mingyuan Wu, Jingcheng Yang et al. · arXiv:2505.19255 · May 2025 · UIUC & Microsoft</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag tool">Tool Use</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>首个训练 VLM 生成文本与中间视觉推理步骤交织的多模态思维链框架，结合 Python 视觉编辑工具与基于结果的奖励，在图表/表格 VQA 上显著提升。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">现有 VLM 的 RFT 方法主要产生纯文本推理，未能实现真正的多模态推理。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">将 Python 视觉编辑工具整合进 RFT 流程，以任务准确率为结果奖励，无需过程级监督。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">图表和表格结构化 VQA 上显著提升，验证了多模态思维链的有效性。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">首个通过 RL 在 VLM 响应中生成多模态思维链的框架；代码已开源。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">VTool-R1 is the first framework that trains VLMs to generate multimodal chains of thought by interleaving text and intermediate visual reasoning steps. VTool-R1 integrates Python-based visual editing tools into the RFT process, enabling VLMs to learn when and how to generate visual reasoning steps that benefit final reasoning. Trained with outcome-based rewards tied to task accuracy, the approach elicits strategic visual tool use without relying on process-based supervision. Experiments on structured visual question answering over charts and tables show that VTool-R1 enhances reasoning performance by teaching VLMs to "think with images".</div>
+  </div>
+
+  <!-- Paper 7: Walk the Talk -->
+  <div class="paper-card" data-category="active-perception" data-tags="RL Tool Use Visual Alignment">
+    <div class="paper-top">
+      <div class="paper-number">7</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2604.06777" target="_blank">
+          Walk the Talk: Bridging the Reasoning-Action Gap for Thinking with Images via Multimodal Agentic Policy Optimization
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">arXiv:2604.06777 · April 2026</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag tool">Tool Use</span>
+      <span class="tag align">Visual Alignment</span>
+      <span class="tag new">2026</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>识别多轮视觉推理中"文字合理但行动失准"的推理-行动差异问题，提出 MAPO 在多模态思维链中对齐文本推理与视觉行动，防止训练崩溃。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">纯结果奖励的 RL 忽视文本合理性可能掩盖执行失误，推理-行动差异在多轮过程中累积，导致训练崩溃。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">Multimodal Agentic Policy Optimization (MAPO)，在多模态思维链中同时优化文本推理质量与视觉操作精度。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">多轮多模态推理基准上验证有效性，避免训练崩溃。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">首次明确定义并量化多模态推理中的推理-行动差异；MAPO 框架有效桥接两者。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">Recent advancements in MLLMs have incentivized models to "think with images" by actively invoking visual tools during multi-turn reasoning. The common RL practice of relying on outcome-based rewards ignores the fact that textual plausibility often masks executive failure — models may exhibit intuitive textual reasoning while executing imprecise or irrelevant visual actions. This reasoning-action discrepancy introduces noise that accumulates throughout multi-turn reasoning, severely degrading multimodal reasoning capabilities and potentially leading to training collapse. The paper introduces Multimodal Agentic Policy Optimization (MAPO) to bridge this gap.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 2: 感知-推理对齐
+  ══════════════════════════════════════════ -->
+  <div class="section-title" id="perception-alignment" style="margin-top:32px">
+    <span class="dot" style="background:#8b5cf6"></span>
+    感知-推理对齐
+  </div>
+
+  <!-- Paper 8: Seeing but Not Believing -->
+  <div class="paper-card" data-category="perception-alignment" data-tags="Visual Alignment">
+    <div class="paper-top">
+      <div class="paper-number">8</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2510.17771" target="_blank">
+          Seeing but Not Believing: Probing the Disconnect Between Visual Attention and Answer Correctness in VLMs
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">arXiv:2510.17771 · October 2025 · ICLR 2026</div>
+    <div class="tags">
+      <span class="tag">VLM</span>
+      <span class="tag align">Visual Alignment</span>
+      <span class="tag">Interpretability</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>系统揭示 VLM "看到但不相信"现象：即使输出错误答案，模型深层注意力也已定位到正确视觉证据。推理时选择性注意力掩蔽无需训练即可持续提升多个模型家族的准确率。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">VLM 在视觉证据存在的情况下仍会给出错误答案，失败根源尚不明确：是未感知证据还是未有效利用？</div></div>
+      <div class="dim"><div class="dim-label">🔍 现象分析</div><div class="dim-body">浅层注意力偏重文本，深层注意力稀疏但可靠地定位到局部证据区域；"看到但不相信"现象广泛存在于 LLaVA、Qwen、Gemma、InternVL 等主流家族。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">推理时干预：通过深层注意力选择性掩蔽放大证据区域，无需重训练。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">命名并量化"seeing but not believing"现象；提出零成本推理时干预方案。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">Vision-Language Models (VLMs) achieve strong results on multimodal tasks such as visual question answering, yet they can still fail even when the correct visual evidence is present. By examining layer-wise attention dynamics, the authors find that shallow layers focus primarily on text, while deeper layers sparsely but reliably attend to localized evidence regions. VLMs often perceive the visual evidence when outputting incorrect answers — a phenomenon termed "seeing but not believing" that widely exists in major VLM families including LLaVA, Qwen, Gemma, and InternVL. The paper introduces an inference-time intervention that highlights deep-layer evidence regions through selective attention-based masking, requiring no training and consistently improving accuracy.</div>
+  </div>
+
+  <!-- Paper 9: VGPO -->
+  <div class="paper-card" data-category="perception-alignment" data-tags="RL Visual Alignment">
+    <div class="paper-top">
+      <div class="paper-number">9</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2604.09349" target="_blank">
+          Visually-Guided Policy Optimization for Multimodal Reasoning
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Zengbin Wang et al. · arXiv:2604.09349 · April 2026</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag align">Visual Alignment</span>
+      <span class="tag new">2026</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>提出 VGPO 框架，通过视觉注意力补偿机制和双粒度优势重加权策略，在策略优化过程中强制增强视觉关注，对抗视觉遗忘，提升数学多模态推理性能。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">RLVR 推进 VLM 推理能力，但文本主导性导致视觉 token 激活稀疏，推理步骤中视觉信息被逐渐遗忘。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">Visual Attention Compensation 机制利用视觉相似度定位并放大视觉线索；双粒度优势重加权（轨迹内 token 级 + 轨迹间级）。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">在数学多模态推理和视觉依赖型任务上均取得更好视觉激活与更高性能。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">首次在策略优化层面直接解决视觉注意力不足与视觉遗忘问题。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">VGPO proposes Visually-Guided Policy Optimization to reinforce visual focus during policy optimization. While RLVR has significantly advanced VLM reasoning ability, the inherent text-dominated nature often leads to insufficient visual faithfulness, characterized by sparse attention activation to visual tokens. Temporal visual forgetting along reasoning steps exacerbates this. VGPO introduces a Visual Attention Compensation mechanism that leverages visual similarity to localize and amplify visual cues, while progressively elevating visual expectations in later steps to counteract visual forgetting. A dual-grained advantage re-weighting strategy highlights tokens with relatively high visual activation (intra-trajectory) and prioritizes trajectories with superior visual accumulation (inter-trajectory).</div>
+  </div>
+
+  <!-- Paper 10: Do MLLMs Really See It -->
+  <div class="paper-card" data-category="perception-alignment" data-tags="RL Visual Alignment">
+    <div class="paper-top">
+      <div class="paper-number">10</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2602.08241" target="_blank">
+          Do MLLMs Really See It: Reinforcing Visual Attention in Multimodal LLMs
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Siqu Ou, Tianrui Wan, Zhiyuan Zhao, Junyu Gao, Xuelong Li · arXiv:2602.08241 · February 2026</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag align">Visual Alignment</span>
+      <span class="tag new">2026</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>发现 MLLMs 早期视觉错位难以在后续推理中自我修正，提出 SAYO —— 引入区域级视觉注意力奖励的 RL 框架，显式对齐视觉 grounding 与推理步骤。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">MLLMs 视觉关注薄弱：早期视觉错位在后续推理中极少被纠正，导致误差传播和推理失败。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">SAYO：引入区域级视觉注意力奖励的 RL 框架，将优化信号与视觉 grounded 推理步骤显式对齐。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">多个多模态基准（推理与感知任务）上持续改善性能。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">SAYO 视觉注意力奖励机制；首次量化早期视觉错位对整体推理链的损害。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">Current MLLMs exhibit weak visual focus: early-stage visual misalignment is rarely corrected during subsequent reasoning, leading to error propagation and failed inferences. The paper proposes SAYO, a visual reasoning model trained with a reinforcement learning (RL) framework that introduces a region-level visual attention-based reward. This reward explicitly aligns optimization signals with visually grounded reasoning steps, enabling the model to learn more reliable attention behaviors. Extensive experiments across multiple multimodal benchmarks demonstrate that SAYO consistently improves performance on diverse reasoning and perception tasks.</div>
+  </div>
+
+  <!-- Paper 11: PAPO -->
+  <div class="paper-card" data-category="perception-alignment" data-tags="RL Visual Alignment">
+    <div class="paper-top">
+      <div class="paper-number">11</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2507.06448" target="_blank">
+          Perception-Aware Policy Optimization for Multimodal Reasoning
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Zhenhailong Wang, Xuehang Guo, Sofia Stoica et al. · arXiv:2507.06448 · July 2025 · UIUC & Alibaba</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag align">Visual Alignment</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>提出 PAPO，在 RLVR 中引入隐式感知损失（KL 散度项），让模型在学习推理同时学习感知，无需额外数据或奖励模型，可无缝嵌入 GRPO/DAPO，视觉依赖型任务提升 8-19%。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">RLVR 优化针对纯文本域，多模态推理中感知错误是主要失败来源，尚未被显式处理。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">PAPO：隐式感知损失（KL 散度项），可即插即用于 GRPO、DAPO 等主流 RLVR 算法。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">多样多模态基准提升 4.4-17.5%；视觉依赖型任务 8.0-19.1%；感知错误减少 30.5%。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">无需额外数据/奖励模型即可解决感知-推理解耦问题；即插即用设计。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">While RLVR has shown great promise for endowing LLMs with robust reasoning, its designs remain tailored to purely textual domains, leading to suboptimal multimodal performance. A major source of error lies in perception of visual inputs. PAPO introduces a novel policy gradient algorithm encouraging the model to learn to perceive while learning to reason, via an Implicit Perception Loss in the form of a KL divergence term — a plug-in for GRPO and DAPO. Notably, PAPO does not rely on additional data curation, reward models, or stronger teacher models. It yields improvements of 4.4%-17.5% on diverse multimodal benchmarks, with 8.0%-19.1% on high vision-dependency tasks, and a 30.5% reduction in perception errors.</div>
+  </div>
+
+  <!-- Paper 12: VL-Rethinker -->
+  <div class="paper-card" data-category="perception-alignment rl-foundation" data-tags="RL Visual Alignment">
+    <div class="paper-top">
+      <div class="paper-number">12</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2504.08837" target="_blank">
+          VL-Rethinker: Incentivizing Self-Reflection of Vision-Language Models with Reinforcement Learning
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Haozhe Wang, Chao Qu et al. · arXiv:2504.08837 · April 2025</div>
+    <div class="tags">
+      <span class="tag">VLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag align">Visual Alignment</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>改进 GRPO 算法并引入 Selective Sample Replay (SSR)，无需蒸馏即可提升 VLM 的慢思考与自我反思能力，在 MathVista、MathVerse、MathVision 上超越 GPT-o1。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">GPT-o1 等慢思考系统在纯文本推理上远超快思考模型，但其多模态推理能力仍与快思考模型相当，差距亟待弥补。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">改进 GRPO + Selective Sample Replay (SSR)，不依赖蒸馏，强化慢思考与自我反思。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">MathVista、MathVerse、MathVision 上超越 GPT-o1，建立多模态慢思考新基准。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">SSR 技术；首个无蒸馏提升 VLM 慢思考能力的 RL 方法。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">VL-Rethinker addresses an important gap: while slow-thinking systems like GPT-o1 and DeepSeek-R1 significantly outperform fast-thinking models on math and science benchmarks, their multimodal reasoning capabilities remain on par with fast-thinking models. The paper adapts the GRPO algorithm with a novel technique called Selective Sample Replay (SSR) to enhance slow-thinking capabilities of vision-language models using reinforcement learning without relying on distillation, advancing state-of-the-art on MathVista, MathVerse, and MathVision beyond GPT-o1.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 3: 细粒度视觉理解
+  ══════════════════════════════════════════ -->
+  <div class="section-title" id="fine-grained" style="margin-top:32px">
+    <span class="dot" style="background:#10b981"></span>
+    细粒度视觉理解
+  </div>
+
+  <!-- Paper 13: Zooming without Zooming -->
+  <div class="paper-card" data-category="fine-grained" data-tags="Zoom">
+    <div class="paper-top">
+      <div class="paper-number">13</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2602.11858" target="_blank">
+          Zooming without Zooming: Region-to-Image Distillation for Fine-Grained Multimodal Perception
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Lai Wei et al. · arXiv:2602.11858 · February 2026 · InclusionAI</div>
+    <div class="tags">
+      <span class="tag">MLLM</span>
+      <span class="tag zoom">Zoom</span>
+      <span class="tag">Fine-Grained</span>
+      <span class="tag new">2026</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>将缩放从推理时工具转化为训练时原语：先放大微小区域让强教师生成高质量 VQA 数据，再蒸馏回全图，使小模型单次前向传播即可实现细粒度感知，并提出 ZoomBench 基准。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">MLLMs 擅长宏观视觉理解，但关键证据细小时容易被全局上下文淹没，细粒度感知能力不足。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">Region-to-Image Distillation：微裁剪区域 → 强教师生成 VQA 数据 → 蒸馏回全图，内化缩放收益。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">ZoomBench：845 条 VQA 跨 6 个细粒度感知维度，双视图协议量化"缩放差距"。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">Region-to-Image 蒸馏范式；ZoomBench 基准；推理时无需工具调用。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">MLLMs excel at broad visual understanding but struggle with fine-grained perception, where decisive evidence is small and easily overwhelmed by global context. Region-to-Image Distillation transforms zooming from an inference-time tool into a training-time primitive, internalizing the benefits of agentic zooming into a single forward pass. The approach first zooms in to micro-cropped regions to let strong teacher models generate high-quality VQA data, then distills this region-grounded supervision back to the full image. After training, the smaller student model improves "single-glance" fine-grained perception without tool use. The authors present ZoomBench, a hybrid-annotated benchmark of 845 VQA data spanning six fine-grained perceptual dimensions.</div>
+  </div>
+
+  <!-- ══════════════════════════════════════════
+       SECTION 4: RL 训练基础方法
+  ══════════════════════════════════════════ -->
+  <div class="section-title" id="rl-foundation" style="margin-top:32px">
+    <span class="dot" style="background:#f59e0b"></span>
+    RL 训练基础方法
+  </div>
+
+  <!-- Paper 14: DAPO -->
+  <div class="paper-card" data-category="rl-foundation" data-tags="RL">
+    <div class="paper-top">
+      <div class="paper-number">14</div>
+      <div class="paper-title">
+        <a href="https://arxiv.org/abs/2503.14476" target="_blank">
+          DAPO: An Open-Source LLM Reinforcement Learning System at Scale
+        </a>
+      </div>
+    </div>
+    <div class="paper-meta">Qiying Yu, Zheng Zhang et al. · arXiv:2503.14476 · March 2025 · ByteDance Seed & Tsinghua AIR</div>
+    <div class="tags">
+      <span class="tag">LLM</span>
+      <span class="tag rl">RL</span>
+      <span class="tag found">Foundation</span>
+    </div>
+    <div class="tldr">
+      <strong>TL;DR：</strong>开源大规模 LLM 强化学习系统，提出解耦裁剪与动态采样策略优化（DAPO）四项关键技术，Qwen2.5-32B 在 AIME 2024 上达到 50 分，为多模态 RL 提供重要基础。
+    </div>
+    <div class="dims">
+      <div class="dim"><div class="dim-label">🎯 研究动机</div><div class="dim-body">SOTA 推理 LLM 的关键技术细节被隐藏，社区难以复现 RL 训练结果，需要完整开源系统。</div></div>
+      <div class="dim"><div class="dim-label">🛠 主要方法</div><div class="dim-body">DAPO 四项关键技术（解耦裁剪 + 动态采样 + 策略优化改进），基于 verl 框架，附精心整理的训练数据集。</div></div>
+      <div class="dim"><div class="dim-label">📊 数据与实验</div><div class="dim-body">Qwen2.5-32B 在 AIME 2024 上达到 50 分，完整训练代码与数据集已开源。</div></div>
+      <div class="dim"><div class="dim-label">⭐ 主要贡献</div><div class="dim-body">首个完整开源大规模 LLM RL 系统；为 PAPO、VL-Rethinker 等多模态 RL 工作奠定基础。</div></div>
+    </div>
+    <button class="toggle-btn" onclick="toggleAbstract(this)">查看完整摘要 ▾</button>
+    <div class="abstract-full">DAPO (Decoupled Clip and Dynamic Sampling Policy Optimization) is an open-source large-scale reinforcement learning system achieving 50 points on AIME 2024 using Qwen2.5-32B base model. The research addresses that key technical details of state-of-the-art reasoning LLMs are concealed (e.g. OpenAI o1, DeepSeek R1), preventing community reproduction of RL training results. The researchers introduce four key techniques that make large-scale LLM RL a success and open-source their training code built on the verl framework, along with carefully curated datasets. Published at ICLR 2026.</div>
+  </div>
+
+  <!-- No results state -->
+  <div id="emptyState" class="empty" style="display:none">
+    🔍 未找到匹配的论文，请尝试其他关键词。
+  </div>
+
+</main>
+</div>
+
+<script>
+  let activeCategory = 'all';
+  let activeTag = null;
+  let searchTerm = '';
+
+  function filterPapers() {
+    searchTerm = document.getElementById('searchInput').value.toLowerCase();
+    applyFilters();
+  }
+
+  function filterCategory(cat, el) {
+    if (el) {
+      document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+      el.classList.add('active');
+    }
+    activeCategory = cat;
+    activeTag = null;
+    applyFilters();
+    return false;
+  }
+
+  function filterTag(tag, el) {
+    document.querySelectorAll('.nav-item').forEach(i => i.classList.remove('active'));
+    if (activeTag === tag) {
+      activeTag = null;
+    } else {
+      activeTag = tag;
+      el.classList.add('active');
+    }
+    activeCategory = 'all';
+    applyFilters();
+    return false;
+  }
+
+  function applyFilters() {
+    const cards = document.querySelectorAll('.paper-card');
+    const sections = document.querySelectorAll('.section-title');
+    let visible = 0;
+
+    cards.forEach(card => {
+      const cats = card.dataset.category || '';
+      const tags = card.dataset.tags || '';
+      const text = card.textContent.toLowerCase();
+
+      const catMatch = activeCategory === 'all' || cats.includes(activeCategory);
+      const tagMatch = !activeTag || tags.includes(activeTag);
+      const searchMatch = !searchTerm || text.includes(searchTerm);
+
+      const show = catMatch && tagMatch && searchMatch;
+      card.style.display = show ? '' : 'none';
+      if (show) visible++;
+    });
+
+    // Show/hide section titles
+    sections.forEach(sec => {
+      const id = sec.id;
+      if (!id) return;
+      const hasVisible = [...cards].some(c =>
+        c.style.display !== 'none' && (c.dataset.category || '').includes(id)
+      );
+      sec.style.display = (activeCategory === 'all' || activeCategory === id || activeTag) && hasVisible ? '' : 'none';
+    });
+
+    document.getElementById('emptyState').style.display = visible === 0 ? '' : 'none';
+  }
+
+  function toggleAbstract(btn) {
+    const abs = btn.nextElementSibling;
+    const open = abs.classList.toggle('open');
+    btn.textContent = open ? '收起摘要 ▴' : '查看完整摘要 ▾';
+  }
+</script>
+
+</body>
+</html>
