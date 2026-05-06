@@ -520,6 +520,10 @@ table li:hover {
     overflow-x: auto;
   }
 
+  nav.site-nav .nav-links {
+    white-space: nowrap;
+  }
+
   nav.site-nav .nav-links a {
     margin-right: 16px;
     font-size: 13px;
