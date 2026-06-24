@@ -42,7 +42,7 @@ a:hover { color: #555; }
 .main-container {
   max-width: 680px;
   margin: 0 auto;
-  padding: 48px 24px 80px;
+  padding: 100px 24px 80px;
 }
 
 /* ── Profile ── */
@@ -232,11 +232,12 @@ a:hover { color: #555; }
 .site-footer {
   max-width: 680px;
   margin: 0 auto;
-  padding: 16px 24px 32px;
+  padding: 16px 24px 48px;
   font-size: 0.8rem;
   color: #aaa;
   display: flex;
   gap: 8px;
+  justify-content: center;
 }
 .site-footer a { color: #aaa; }
 
