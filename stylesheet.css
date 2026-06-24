@@ -20,7 +20,7 @@ a:hover { color: #555; }
   z-index: 10;
 }
 .nav-inner {
-  max-width: 680px;
+  max-width: 580px;
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
@@ -40,7 +40,7 @@ a:hover { color: #555; }
 
 /* ── Container ── */
 .main-container {
-  max-width: 680px;
+  max-width: 580px;
   margin: 0 auto;
   padding: 100px 24px 80px;
 }
@@ -230,7 +230,7 @@ a:hover { color: #555; }
 
 /* ── Footer ── */
 .site-footer {
-  max-width: 680px;
+  max-width: 580px;
   margin: 0 auto;
   padding: 16px 24px 48px;
   font-size: 0.8rem;
