@@ -4,8 +4,8 @@ body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Helvetica Neue", Arial, sans-serif;
   background: #fff;
   color: #111;
-  font-size: 15px;
-  line-height: 1.7;
+  font-size: 16px;
+  line-height: 1.65;
 }
 
 a { color: #111; text-decoration: underline; text-underline-offset: 3px; }
@@ -20,13 +20,14 @@ a:hover { color: #555; }
   z-index: 10;
 }
 .nav-inner {
-  max-width: 580px;
+  max-width: 780px;
   margin: 0 auto;
   padding: 0 24px;
   display: flex;
   align-items: center;
   height: 48px;
 }
+.nav-links { display: flex; white-space: nowrap; }
 .nav-links a {
   text-decoration: none;
   font-size: 0.88rem;
@@ -40,26 +41,31 @@ a:hover { color: #555; }
 
 /* ── Container ── */
 .main-container {
-  max-width: 580px;
+  max-width: 780px;
   margin: 0 auto;
-  padding: 100px 24px 80px;
+  padding: 64px 24px 88px;
 }
 
 /* ── Profile ── */
 .profile-section {
-  display: flex;
-  gap: 48px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 180px;
+  gap: 56px;
   align-items: flex-start;
-  margin-bottom: 52px;
+  margin-bottom: 72px;
 }
 .profile-text { flex: 1; }
 .profile-name {
-  font-size: 2rem;
+  font-size: clamp(2rem, 5vw, 2.7rem);
   font-weight: 700;
-  letter-spacing: -0.5px;
-  margin-bottom: 16px;
+  line-height: 1.12;
+  letter-spacing: -0.04em;
+  margin-bottom: 8px;
 }
-.profile-bio { color: #333; margin-bottom: 12px; }
+.profile-name span { color: #777; font-weight: 500; }
+.profile-title { color: #666; font-size: 0.95rem; margin-bottom: 24px; }
+.profile-bio { color: #333; font-size: 1.02rem; line-height: 1.75; margin-bottom: 16px; }
+.research-line { color: #555; font-size: 0.88rem; font-weight: 600; letter-spacing: 0.01em; }
 .research-interests { margin: 16px 0; }
 .research-area {
   display: flex;
@@ -71,7 +77,8 @@ a:hover { color: #555; }
 .research-area:last-child { border-bottom: none; }
 .area-label { font-weight: 600; min-width: 180px; flex-shrink: 0; }
 .area-topics { color: #555; }
-.profile-details { margin: 12px 0; font-size: 0.9rem; color: #444; }
+.profile-details { margin: 18px 0 0; font-size: 0.9rem; color: #444; }
+.profile-details a { color: inherit; text-decoration-color: #bbb; }
 .social-links { margin-top: 16px; }
 .social-links a {
   font-size: 0.88rem;
@@ -84,26 +91,30 @@ a:hover { color: #555; }
 .social-links a:hover { color: #555; border-color: #555; }
 .divider { color: #ccc; margin: 0 8px; }
 .profile-photo img {
-  width: 160px;
-  border-radius: 8px;
+  width: 180px;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  border-radius: 12px;
   display: block;
   filter: grayscale(15%);
 }
 
 /* ── Section headings ── */
 .section-heading {
-  font-size: 0.72rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: #888;
-  border-bottom: 1px solid #e8e8e8;
-  padding-bottom: 8px;
-  margin-bottom: 20px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  color: #171717;
+  margin-bottom: 18px;
 }
+.section-header-row { display: flex; align-items: baseline; justify-content: space-between; border-bottom: 1px solid #e8e8e8; margin-bottom: 4px; }
+.section-header-row .section-heading { margin-bottom: 10px; }
+.section-link { color: #666; font-size: 0.82rem; text-decoration: none; }
+.section-link:hover { color: #111; }
 
 /* ── News ── */
-.news-section { margin-bottom: 0; }
+.news-section { margin-bottom: 72px; }
+.news-section > .section-heading { border-bottom: 1px solid #e8e8e8; padding-bottom: 10px; }
 .news-item {
   display: flex;
   gap: 16px;
@@ -133,11 +144,22 @@ a:hover { color: #555; }
 }
 .news-toggle:hover { background: #f5f5f5; }
 
+/* ── Selected work ── */
+.selected-section { margin-top: 28px; }
+.featured-pub {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 20px;
+  padding: 22px 0;
+  border-bottom: 1px solid #f0f0f0;
+}
+.pub-year { color: #888; font-size: 0.85rem; font-weight: 600; padding-top: 2px; }
+
 /* ── Publications ── */
 .pub-list { list-style: none; }
-.pub-item { padding: 16px 0; border-bottom: 1px solid #f0f0f0; }
+.pub-item { padding: 22px 0; border-bottom: 1px solid #f0f0f0; }
 .pub-item:last-child { border-bottom: none; }
-.pub-title { font-weight: 600; margin-bottom: 4px; }
+.pub-title { font-size: 1rem; line-height: 1.45; font-weight: 650; margin-bottom: 5px; }
 .pub-authors { font-size: 0.88rem; color: #444; margin-bottom: 4px; }
 .pub-venue { font-size: 0.88rem; color: #666; font-style: italic; margin-bottom: 8px; }
 .pub-links a {
@@ -166,6 +188,7 @@ a:hover { color: #555; }
 
 /* ── Experience / Education ── */
 .exp-section { margin-bottom: 44px; }
+.exp-section > .section-heading { border-bottom: 1px solid #e8e8e8; padding-bottom: 10px; }
 .exp-entry {
   display: flex;
   gap: 24px;
@@ -230,7 +253,7 @@ a:hover { color: #555; }
 
 /* ── Footer ── */
 .site-footer {
-  max-width: 580px;
+  max-width: 780px;
   margin: 0 auto;
   padding: 16px 24px 48px;
   font-size: 0.8rem;
@@ -242,8 +265,15 @@ a:hover { color: #555; }
 .site-footer a { color: #aaa; }
 
 @media (max-width: 600px) {
-  .profile-section { flex-direction: column-reverse; gap: 20px; }
-  .profile-photo img { width: 110px; }
+  .site-nav { overflow-x: auto; scrollbar-width: none; }
+  .site-nav::-webkit-scrollbar { display: none; }
+  .nav-links a { margin-right: 20px; }
+  .main-container { padding-top: 40px; }
+  .profile-section { grid-template-columns: 1fr; gap: 24px; margin-bottom: 56px; }
+  .profile-photo { order: -1; }
+  .profile-photo img { width: 124px; }
+  .profile-name { font-size: 2rem; }
+  .featured-pub { grid-template-columns: 1fr; gap: 4px; }
   .exp-header { flex-direction: column; gap: 2px; }
   .area-label { min-width: 120px; }
 }
