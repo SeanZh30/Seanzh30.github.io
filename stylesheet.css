@@ -319,6 +319,8 @@ a:hover { color: #555; }
 .site-theme .social-links .divider { display: none; }
 .site-theme .social-links a { margin: 0; padding: 5px 12px; border: 1px solid #d5dde2; border-radius: 6px; background: transparent; color: var(--home-accent); font-size: 13px; font-weight: 400; letter-spacing: 0; }
 .site-theme .social-links a:hover { background: #eaf0f4; color: var(--home-accent); }
+.site-theme .internship-note { margin-top: 24px; padding-left: 14px; border-left: 2px solid var(--home-accent); font-size: 14px; line-height: 1.7; color: #333; }
+.site-theme .internship-note a { color: var(--home-accent); text-decoration-color: #b7c5ce; overflow-wrap: anywhere; }
 .site-theme .section-heading { font-size: 21px; font-weight: 500; letter-spacing: -0.03em; border: 0; padding: 0; margin-bottom: 20px; }
 .site-theme .news-section { margin-bottom: 0; }
 .site-theme .news-list { border-left: 1px solid #d5dde2; margin-left: 3px; padding-left: 20px; }
